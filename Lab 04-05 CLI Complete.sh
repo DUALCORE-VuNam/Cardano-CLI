@@ -62,8 +62,8 @@ tokenamount=1
 
 
 #Step 1: =========Tạo Policy ID===============
-mkdir tokens; cd tokens
-mkdir policy
+//mkdir tokens; cd tokens
+//mkdir policy
 
 cardano-cli address key-gen \
     --verification-key-file policy/policy.vkey \
