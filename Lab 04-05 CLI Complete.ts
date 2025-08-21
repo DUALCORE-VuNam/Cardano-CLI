@@ -1,5 +1,5 @@
-#================Lab 03- Tạo giao dich có metadata  =============
-# Step 1: =========Tạo file Metadata==================
+// #================Lab 03- Tạo giao dich có metadata  =============
+// # Step 1: =========Tạo file Metadata==================
 file JSON
 {
     "674": {
@@ -7,7 +7,7 @@ file JSON
         }
 }
  
-# Step 2: =========Soạn thảo giao dich==================
+// # Step 2: =========Soạn thảo giao dich==================
  
 cardano-cli conway transaction build --testnet-magic 2 \
 --tx-in $UTXO_IN \
@@ -27,20 +27,20 @@ echo  $UTXO_IN
 echo $BOB_ADDR+$VALUE
 echo $address
 
-# Step 3: =========Tạo file Metadata==================
+// # Step 3: =========Tạo file Metadata==================
 cardano-cli conway transaction sign $testnet \
 --signing-key-file $address_skey \
 --tx-body-file simple-tx.raw \
 --out-file simple-tx.signed
 
-# Step 4: =========Tạo file Metadata==================
+// # Step 4: =========Tạo file Metadata==================
 cardano-cli conway transaction submit $testnet \
 --tx-file simple-tx.signed
 
 
 
-#================Lab 04- Tạo tokens/NFT =============
-#Step 1: =========Gán các biến==================
+// #================Lab 04- Tạo tokens/NFT =============
+// #Step 1: =========Gán các biến==================
 apt update
 apt install xxd
 
@@ -78,7 +78,7 @@ echo "}" >> policy/policy.script
 
 
 
-##====Đọc lại nội dung file policy.script để kiểm tra==============
+// ##====Đọc lại nội dung file policy.script để kiểm tra==============
 cat policy/policy.script
 
 cardano-cli conway transaction policyid --script-file ./policy/policy.script > policy/policyID/var/folders/wq/v4n7xjh53njcdrlzxw7454200000gn/T/TemporaryItems/NSIRD_screencaptureui_jeGN0Q/Ảnh màn hình 2025-03-22 lúc 11.28.01.png
@@ -93,7 +93,7 @@ policyid=$(cat policy/policyID)
 
 
 
-#Step 2: =========Tạo Metadata ===============
+// #Step 2: =========Tạo Metadata ===============
 
 echo "{" >> metadata.json
 echo "  \"721\": {" >> metadata.json
@@ -110,7 +110,7 @@ echo "}" >> metadata.json
 
 cat metadata.json 
 
-#Step 3: =========Soạn thảo giao dịch===============
+// #Step 3: =========Soạn thảo giao dịch===============
 
 echo $policyid.$tokenname >policy_token.log
 
@@ -124,14 +124,14 @@ cardano-cli conway transaction build $testnet \
 --witness-override 2 \
 --out-file mint-nft.raw
 
-#Step 4: =========Tạo ký giao dịchdịch===============
+// #Step 4: =========Tạo ký giao dịchdịch===============
 cardano-cli conway transaction sign  $testnet \
 --signing-key-file ../payment.skey  \
 --signing-key-file policy/policy.skey  \
 --tx-body-file mint-nft.raw \
 --out-file mint-nft.signed
 
-#Step 5: =========Gửi giao dịchdịch===============
+// #Step 5: =========Gửi giao dịchdịch===============
 
 cardano-cli conway transaction submit $testnet --tx-file mint-nft.signed
 
@@ -158,7 +158,7 @@ cardano-cli conway transaction sign --tx-file tx.raw --signing-key-file policy.s
 cardano-cli conway transaction submit --tx-file tx.signedTransaction successfully submitted.
 
 
-#================Lab 05- Gửi tokens =============
+// #================Lab 05- Gửi tokens =============
 
 
 txhash1=302d083db1f0b4cb77257531e85fe133b3ff6aa80b61681a005165b8fa34752a#0
@@ -184,7 +184,7 @@ cardano-cli conway transaction submit $testnet --tx-file tx.signed
 
 
 
-#================Lab 06- Burn tokens/NFT =============
+// #================Lab 06- Burn tokens/NFT =============
 cardano-cli conway transaction submit --tx-file burning.signed --testnet-magic 2
 burnfee="0"
 burnoutput="0"
@@ -214,4 +214,5 @@ cardano-cli conway transaction submit \
 	--testnet-magic 2
 
 cd /workspaces/cardano-developer-starter-kit
+
 
