@@ -1,10 +1,10 @@
-#1-Cài đặt xxd nếu chưa có
+// #1-Cài đặt xxd nếu chưa có
 apt upgrade
 apt update
 apt install xxd
 
 
-#2-Tạo thư mục và Policy
+// #2-Tạo thư mục và Policy
 mkdir policy
 cardano-cli address key-gen \
     --verification-key-file policy/policy.vkey \
@@ -19,7 +19,7 @@ echo "}" >> policy/policy.script
 
 cardano-cli conway transaction policyid --script-file ./policy/policy.script > policy/policyID
 
-#3-Tạo biến môi trường
+// #3-Tạo biến môi trường
 testnet="--testnet-magic 2"
 address=$(cat base.addr)
 address_SKEY="payment.xsk"
@@ -35,7 +35,7 @@ tokenamount="1"
 output="2000000"
 ipfs_hash="QmdpcDnQj5u54JZ5ZxQMLXjajZAeAXRqHs7dNGvh7wVhq1"
 
-#4-Tạo metadata
+// #4-Tạo metadata
 echo "{" >> metadata.json
 echo "  \"721\": {" >> metadata.json
 echo "    \"$(cat policy/policyID)\": {" >> metadata.json
@@ -50,7 +50,7 @@ echo "  }" >> metadata.json
 echo "}" >> metadata.json
 
 
-#4-Tạo giao dịch
+// #4-Tạo giao dịch
 cardano-cli conway transaction build \
 $testnet \
 --tx-in $txhash#$txix \
@@ -62,30 +62,30 @@ $testnet \
 --out-file mint-nft.raw
 
 
-#5-Tạo ký giao dịch
+// #5-Tạo ký giao dịch
 cardano-cli conway transaction sign  $testnet \
 --signing-key-file $address_SKEY  \
 --signing-key-file policy/policy.skey  \
 --tx-body-file mint-nft.raw \
 --out-file mint-nft.signed
 
-#5-Gửi giao dịch 
+// #5-Gửi giao dịch 
 
 cardano-cli conway transaction submit $testnet --tx-file mint-nft.signed 
 
 
 
 
-#================= Burn token vừa tạo=============
-#1-Truy vấn token nằm ở UTXO nào
+// #================= Burn token vừa tạo=============
+// #1-Truy vấn token nằm ở UTXO nào
 cardano-cli query utxo $testnet --address $address 
 
-#2- cập nhật biến môi trường
+// #2- cập nhật biến môi trường
 txhash="5a4925b330916e62307766802f5af4ce8b234c27de8271a901086c08733da0f1"
 txix="0"
 burnoutput="1400000"
 
-#3-Tạo giao dịch
+// #3-Tạo giao dịch
 cardano-cli conway transaction build \
  --testnet-magic 2\
  --tx-in $txhash#$txix\
@@ -97,13 +97,13 @@ cardano-cli conway transaction build \
  --witness-override 2\
  --out-file burning.raw
 
-#4-Ký giao dịch
+// #4-Ký giao dịch
 cardano-cli conway transaction sign  $testnet \
 --signing-key-file $address_SKEY  \
 --signing-key-file policy/policy.skey  \
 --tx-body-file burning.raw \
 --out-file burning.signed
 
-#5-Gửi giao dịch
+// #5-Gửi giao dịch
 
 cardano-cli conway transaction submit $testnet --tx-file burning.signed 
