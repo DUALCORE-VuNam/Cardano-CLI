@@ -1,5 +1,5 @@
-#================Lab 03- Tạo giao dich có metadata  =============
-# Step 1: =========Tạo file Metadata==================
+// #================Lab 03- Tạo giao dich có metadata  =============
+// # Step 1: =========Tạo file Metadata==================
 file JSON
 {
     "674": {
@@ -7,7 +7,7 @@ file JSON
         }
 }
  
-# Step 2: =========Soạn thảo giao dich==================
+// # Step 2: =========Soạn thảo giao dich==================
  
 cardano-cli conway transaction build --testnet-magic 2 \
 --tx-in $UTXO_IN \
@@ -27,19 +27,19 @@ echo  $UTXO_IN
 echo $BOB_ADDR+$VALUE
 echo $Alice_address
 
-# Step 3: =========Tạo file Metadata==================
+// # Step 3: =========Tạo file Metadata==================
 cardano-cli conway transaction sign $testnet \
 --signing-key-file $Alice_skey \
 --tx-body-file simple-tx.raw \
 --out-file simple-tx.signed
-# Step 4: =========Tạo file Metadata==================
+// # Step 4: =========Tạo file Metadata==================
 cardano-cli conway transaction submit $testnet \
 --tx-file simple-tx.signed
 
 
 
-#================Lab 04- Tạo tokens/NFT =============
-#Step 1: =========Gán các biến==================
+// #================Lab 04- Tạo tokens/NFT =============
+// #Step 1: =========Gán các biến==================
 apt update
 apt install xxd
 
@@ -58,7 +58,7 @@ realtokenname="KHBK02"
 tokenname=$(echo -n $realtokenname| xxd -ps | tr -d '\n')
 tokenamount=1000000
 
-#Step 1: =========Tạo Policy ID===============
+// #Step 1: =========Tạo Policy ID===============
 mkdir tokens; cd tokens
 mkdir policy
 cardano-cli address key-gen \
@@ -73,7 +73,7 @@ echo "  \"type\": \"sig\"" >> policy/policy.script
 echo "}" >> policy/policy.script
 
 
-##====Đọc lại nội dung file policy.script để kiểm tra==============
+// ##====Đọc lại nội dung file policy.script để kiểm tra==============
 cat policy/policy.script
 cardano-cli conway transaction policyid --script-file ./policy/policy.script > policy/policyID
 cat policy/policyID
@@ -86,7 +86,7 @@ policyid=$(cat policy/policyID)
 
 
 
-#Step 2: =========Tạo Metadata ===============
+// #Step 2: =========Tạo Metadata ===============
 
 echo "{" >> metadata.json
 echo "  \"721\": {" >> metadata.json
@@ -103,7 +103,7 @@ echo "}" >> metadata.json
 
 cat metadata.json 
 
-#Step 3: =========Soạn thảo giao dịch===============
+// #Step 3: =========Soạn thảo giao dịch===============
 
 echo $policyid.$tokenname >policy_token.log
 
@@ -121,14 +121,14 @@ echo $txhash#$txix $testnet
 echo $address+$output+"$tokenamount $policyid.$tokenname"
 echo $address
 
-#Step 4: =========Tạo ký giao dịchdịch===============
+// #Step 4: =========Tạo ký giao dịchdịch===============
 cardano-cli conway transaction sign  $testnet \
 --signing-key-file ../payment.skey  \
 --signing-key-file policy/policy.skey  \
 --tx-body-file mint-nft.raw \
 --out-file mint-nft.signed
 
-#Step 5: =========Gửi giao dịchdịch===============
+// #Step 5: =========Gửi giao dịchdịch===============
 
 cardano-cli conway transaction submit $testnet --tx-file mint-nft.signed 
 
@@ -219,3 +219,4 @@ cardano-cli conway transaction sign \
 cardano-cli conway transaction submit \
 	--tx-file burning.signed \
 	--testnet-magic 2
+
