@@ -1,7 +1,7 @@
 import { Blockfrost, Lucid } from "https://deno.land/x/lucid/mod.ts";
 import "jsr:@std/dotenv/load";
 
-// Lấy các biến từ env
+// Lấy các biến từ env.
 const MNEMONIC = Deno.env.get("MNEMONIC");
 const BLOCKFROST_ID = Deno.env.get("BLOCKFROST_ID");
 const BLOCKFROST_NETWORK = Deno.env.get("BLOCKFROST_NETWORK")
