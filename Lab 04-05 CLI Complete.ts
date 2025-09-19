@@ -1,4 +1,4 @@
-// #================Lab 03- Tạo giao dich có metadata  =============
+// #================Lab 03- Tạo giao dich có metadata  ===============
 // # Step 1: =========Tạo file Metadata==================
 file JSON
 {
@@ -7,7 +7,7 @@ file JSON
         }
 }
  
-// # Step 2: =========Soạn thảo giao dich==================
+// # Step 2: =========Soạn thảo giao dich======================
  
 cardano-cli conway transaction build --testnet-magic 2 \
 --tx-in $UTXO_IN \
@@ -78,7 +78,7 @@ echo "}" >> policy/policy.script
 
 
 
-// ##====Đọc lại nội dung file policy.script để kiểm tra==============
+// ##====Đọc lại nội dung file policy.script để kiểm tra================
 cat policy/policy.script
 
 cardano-cli conway transaction policyid --script-file ./policy/policy.script > policy/policyID/var/folders/wq/v4n7xjh53njcdrlzxw7454200000gn/T/TemporaryItems/NSIRD_screencaptureui_jeGN0Q/Ảnh màn hình 2025-03-22 lúc 11.28.01.png
@@ -214,5 +214,6 @@ cardano-cli conway transaction submit \
 	--testnet-magic 2
 
 cd /workspaces/cardano-developer-starter-kit
+
 
 
